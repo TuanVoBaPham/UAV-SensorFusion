@@ -56,41 +56,6 @@ time,gyroZ,magX,magY,gnssHead,isNewGnss,isGoodGnss,gnssHeadAcc
 | `isGoodGnss` | Cờ 0/1 | `1`: GNSS báo dữ liệu đáng tin; `0`: GNSS báo dữ liệu xấu |
 | `gnssHeadAcc` | rad | Sai số góc hướng GNSS được cung cấp cùng dữ liệu |
 
-### Thống kê của bộ dữ liệu
-
-| Thuộc tính | Giá trị quan sát |
-| --- | --- |
-| Số dòng dữ liệu, không tính header | 12.000 |
-| Số cột | 8 |
-| Thời gian bắt đầu | 0 s |
-| Thời gian kết thúc | 599,952 s, gần 10 phút |
-| Khoảng cách giữa hai mẫu liên tiếp | 0,040–0,060 s |
-| Trung vị khoảng lấy mẫu | 0,050 s, tương đương khoảng 20 Hz |
-| Số dòng có dữ liệu GNSS mới | 2.950 |
-| Trung vị khoảng thời gian giữa các lần GNSS mới | 0,200 s, tương đương khoảng 5 Hz |
-| Số dòng GNSS mới và được cờ báo tốt | 2.900 |
-| Số dòng GNSS mới và được cờ báo xấu | 50 |
-| Số dòng có `isGoodGnss = 0`, gồm cả dữ liệu cũ | 200 |
-| Ô trống hoặc giá trị số không hữu hạn | 0 |
-| Thời gian không tăng hoặc dòng trùng hoàn toàn | 0 |
-
-Dữ liệu không có cột góc hướng chuẩn độc lập (ground truth). Vì vậy, chưa thể tính sai số tuyệt đối hoặc RMSE so với góc hướng thực chỉ từ CSV này. GNSS cũng có thể lỗi nên không mặc định coi GNSS là ground truth.
-
-### Một số đoạn cần chú ý khi kiểm thử
-
-Các khoảng dưới đây là thời điểm mẫu đầu và mẫu cuối quan sát được, không phải nhãn lỗi đã được xác nhận.
-
-| Khoảng thời gian | Quan sát trực tiếp | Nội dung cần kiểm tra |
-| --- | --- | --- |
-| 60,003–69,949 s | `gyroZ = 0` liên tục 200 mẫu | Phân biệt dữ liệu lỗi với trạng thái thực sự không quay |
-| 119,947–129,947 s | `gyroZ = 0.08739` giữ nguyên trong 201 mẫu | Phát hiện tín hiệu bị giữ hằng dựa trên thời gian và đối chiếu cảm biến khác |
-| 180,000–189,946 s | `gyroZ = 5.41012 rad/s`, vượt giới hạn 300 độ/s | Loại bỏ hoặc xử lý dữ liệu quá dải |
-| 239,998–249,948 s | `isGoodGnss = 0` trong 200 dòng | Xử lý GNSS báo chất lượng xấu |
-| Giữa 269,804 và 279,996 s | Hai lần GNSS mới cách nhau 10,192 s | Xử lý khoảng thiếu cập nhật GNSS |
-| 359,996–369,950 s | `sqrt(magX^2 + magY^2) > 2` trong 200 mẫu | Phát hiện độ lớn từ trường lệch xa giá trị kỳ vọng gần 1 |
-
-Mốc `magNorm > 2` ở bảng chỉ mô tả đoạn dữ liệu quan sát được. Ngưỡng chấp nhận cảm biến từ phải được lựa chọn và giải thích trong thiết kế thuật toán.
-
 ## 4. Đầu ra yêu cầu
 
 Mỗi chu kỳ cần trả về ít nhất các trường sau:
