@@ -233,13 +233,3 @@ Bên cạnh hai tệp `.m`, cần nộp một tài liệu thiết kế gồm:
 
 Khi đánh giá, cần xem xét tính liên tục của góc hướng khi qua mốc 0/360 độ, khả năng ước lượng bias, phản ứng khi cảm biến bất thường và khả năng phục hồi sau khi dữ liệu tốt trở lại. Các chỉ số sai số so với một cảm biến phải ghi rõ cảm biến tham chiếu và điều kiện dữ liệu được chấp nhận.
 
-### Tiêu chí chấm điểm theo đề bài
-
-| Hạng mục | Điểm |
-| --- | ---: |
-| Tiền xử lý dữ liệu: gyro 1,5; cảm biến từ 1,5; phần khác 1 | 4,0 |
-| Bộ lọc Kalman: mô hình 1; predict 1; update 1; xử lý bất thường 1 | 4,0 |
-| Tune tham số hợp lý và kết quả đạt yêu cầu | 0,5 |
-| Mã nguồn sạch, lập trình hướng đối tượng | 1,0 |
-| Tài liệu trình bày tốt | 0,5 |
-| **Tổng** | **10,0** |
